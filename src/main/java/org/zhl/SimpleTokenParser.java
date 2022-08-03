@@ -10,20 +10,26 @@ import java.util.List;
  **/
 public class SimpleTokenParser implements Parser {
 
+    private CodeProvider codeProvider;
+
+    public SimpleTokenParser(CodeProvider codeProvider) {
+        this.codeProvider = codeProvider;
+    }
+
     @Override
-    public Parser parse(CodeProvider codeProvider) {
-        final String code = codeProvider.provide();
-        final CharArrayReader charArrayReader = new CharArrayReader(code.toCharArray());
+    public Parser parse() {
+
+        final CharArrayReader charArrayReader = new CharArrayReader(codeProvider.provide().toCharArray());
 
         int ch = 0;
         // dfa 初始状态
         DFAStateEnum dfaState = DFAStateEnum.Initial;
-
         try {
             while ((ch = charArrayReader.read()) != -1) {
                 final char tS = (char)ch;
                 switch (dfaState) {
                     case Initial:
+                        dfaState = initToken(tS);
                         break;
                 }
             }
@@ -33,8 +39,18 @@ public class SimpleTokenParser implements Parser {
         return this;
     }
 
+    private DFAStateEnum initToken(char tS) {
+
+        if (Character.isAlphabetic(tS)) {
+
+        }
+
+        return null;
+    }
+
     enum DFAStateEnum {
-        Initial;
+        Initial,
+        ID;
     }
 
     private static class TokenHolder {
