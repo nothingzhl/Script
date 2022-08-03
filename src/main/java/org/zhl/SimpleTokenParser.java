@@ -1,6 +1,8 @@
 package org.zhl;
 
 import java.io.CharArrayReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zhanghanlin
@@ -8,31 +10,40 @@ import java.io.CharArrayReader;
  **/
 public class SimpleTokenParser implements Parser {
 
-    private SimpleTokenParser() {
-    }
-
-    public static SimpleTokenParser getInstance() {
-        return SimpleTokenParserHolder.INSTANCE;
-    }
-
     @Override
-    public Token parse(CodeProvider codeProvider) {
+    public Parser parse(CodeProvider codeProvider) {
         final String code = codeProvider.provide();
         final CharArrayReader charArrayReader = new CharArrayReader(code.toCharArray());
 
         int ch = 0;
-        try {
-            while ((ch = charArrayReader.read())!=-1) {
+        // dfa 初始状态
+        DFAStateEnum dfaState = DFAStateEnum.Initial;
 
+        try {
+            while ((ch = charArrayReader.read()) != -1) {
+                final char tS = (char)ch;
+                switch (dfaState) {
+                    case Initial:
+                        break;
+                }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
-        return null;
+        return this;
     }
 
-    private static class SimpleTokenParserHolder {
-        static final SimpleTokenParser INSTANCE = new SimpleTokenParser();
+    enum DFAStateEnum {
+        Initial;
+    }
+
+    private static class TokenHolder {
+        List<Token> tokens = new ArrayList<>(32);
+
+        void addToken(Token token) {
+            tokens.add(token);
+        }
+
     }
 
 }
