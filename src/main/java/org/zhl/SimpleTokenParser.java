@@ -3,10 +3,12 @@ package org.zhl;
 import java.io.CharArrayReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zhanghanlin
  * @date 2022/8/3
+ * int age = 40
  **/
 public class SimpleTokenParser implements Parser {
 
@@ -27,9 +29,10 @@ public class SimpleTokenParser implements Parser {
         try {
             while ((ch = charArrayReader.read()) != -1) {
                 final char tS = (char)ch;
+                Token token = new SimpleToken();
                 switch (dfaState) {
                     case Initial:
-                        dfaState = initToken(tS);
+                        dfaState = initToken(tS, token);
                         break;
                 }
             }
@@ -39,13 +42,18 @@ public class SimpleTokenParser implements Parser {
         return this;
     }
 
-    private DFAStateEnum initToken(char tS) {
+    private DFAStateEnum initToken(char tS, Token token) {
+        DFAStateEnum dfaStateEnum = DFAStateEnum.Initial;
 
         if (Character.isAlphabetic(tS)) {
 
+        } else if (Character.isDigit(tS)) {
+
+        } else if (Objects.equals('>', tS)) {
+
         }
 
-        return null;
+        return dfaStateEnum;
     }
 
     enum DFAStateEnum {

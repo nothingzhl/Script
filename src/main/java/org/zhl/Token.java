@@ -8,5 +8,9 @@ public interface Token {
 
     TokenTypeEnum getType();
 
+    void setType(TokenTypeEnum tokenTypeEnum);
+
     String getText();
+
+    void setText(String text);
 }
