@@ -44,7 +44,9 @@ public class SimpleTokenParser implements Parser {
 
     private DFAStateEnum initToken(char tS, Token token) {
         DFAStateEnum dfaStateEnum = DFAStateEnum.Initial;
-
+        if (token.isComplete()) {
+            return dfaStateEnum;
+        }
         if (Character.isAlphabetic(tS)) {
 
         } else if (Character.isDigit(tS)) {

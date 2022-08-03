@@ -13,4 +13,6 @@ public interface Token {
     String getText();
 
     void setText(String text);
+
+    boolean isComplete();
 }
