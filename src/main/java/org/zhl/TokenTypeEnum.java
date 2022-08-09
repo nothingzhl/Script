@@ -4,7 +4,9 @@ package org.zhl;
  * @author zhanghanlin
  */
 
-public enum TokenTypeEnum  {
+public enum TokenTypeEnum {
 
-    Identifier;
+    Identifier,
+    ID,
+    GT;
 }

@@ -4,15 +4,45 @@ package org.zhl;
  * @author zhanghanlin
  * @date 2022/8/3
  **/
-public interface Token {
+public abstract class Token {
 
-    TokenTypeEnum getType();
+    private TokenTypeEnum tokenType;
 
-    void setType(TokenTypeEnum tokenTypeEnum);
+    private boolean completed;
 
-    String getText();
+    private StringBuilder tmpSb;
 
-    void setText(String text);
+    public Token() {
+        this.tmpSb = new StringBuilder();
+        this.completed = false;
+    }
 
-    boolean isComplete();
+    public boolean isComplete() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public String getText() {
+        return tmpSb.toString();
+    }
+
+    public TokenTypeEnum getTokenType() {
+        return this.tokenType;
+    }
+
+    public void setTokenType(TokenTypeEnum tokenTypeEnum) {
+        this.tokenType = tokenTypeEnum;
+    }
+
+    public void addCh(char cr) {
+        tmpSb.append(cr);
+    }
+
+    @Override
+    public String toString() {
+        return "Token{" + "tokenType=" + tokenType + ", tmpSb=" + tmpSb + '}';
+    }
 }
